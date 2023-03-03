@@ -6,6 +6,8 @@ import DatePicker from "react-datepicker";
 
 import { Bar } from "react-chartjs-2";
 import BarComponent from "./BarComponent";
+import TimeComponent from "./TimeComponent";
+
 import { objType } from "../Assets/handleData";
 
 // set data for the barchart -->
@@ -22,6 +24,10 @@ const Main = () => {
   const [date, setDate] = React.useState("");
   const [selectedData, setSelectedData] = React.useState({});
   const [sch_array, setSch_array] = React.useState<string[]>([]);
+  const [perDate, setPerDate] = React.useState<string>("");
+
+
+
   // console.log(data_obj);
   // React.useEffect(() => {
   //  console.log('i was changed')
@@ -45,7 +51,11 @@ const Main = () => {
 
   return (
     <div className={styles.main_div}>
-      <p>Enter the date for the graph</p>
+      <p
+      style = {{
+        paddingLeft : '10px',
+      }}
+      >Enter the date for the graph</p>
       <input type="date" onChange={(e) => handleDateChange(e)} />
 
       {/* outer div */}
@@ -112,15 +122,22 @@ const Main = () => {
                   <button
                   style = {{
                     height : '40px',
-                    width : '80px',
+                    width : '90px',
                     border : 'none',
                     borderRadius : '5px',
-                    
+                    backgroundColor : `#6f61c2`,
+                    color : 'white',
+                    fontWeight : 'bolder',
+                    fontSize : '15px',
                   }}
-                  
+                  onClick = {() => {
+                  console.log(data_obj[`${date}`][`${sch_date}`])
+                  setPerDate(sch_date)
+                  }}
                   >{sch_date}</button>
                 ))}
               </div>
+              {perDate.length > 0 ? <TimeComponent data = {data_obj[`${date}`][`${perDate}`]} /> : <div></div>}
             </div>
           ) : (
             <p></p>
