@@ -2,9 +2,12 @@ import React from "react";
 import { objType } from "../Assets/handleData";
 
 import { Bar } from "react-chartjs-2";
+import { UserData } from "../Assets/data1";
+import { Chart, registerables } from "chart.js";
+
+Chart.register(...registerables);
 
 const BarComponent = ({ dataForBar }: objType) => {
-  // console.log(dataForBar);
   // console.log(Object.keys(dataForBar));
   // console.log(typeof Object.keys(dataForBar))
   // console.log(Object.values(dataForBar));
@@ -12,26 +15,41 @@ const BarComponent = ({ dataForBar }: objType) => {
   const arr1: string[][] = Object.values(dataForBar);
   // console.log(arr1);
 
-  const [data, setData] = React.useState<{
-    labels: string[];
-    datasets: {
-      label: string;
-      data: number[];
-    }[];
-  }>({
+  const [chartData, setchartData] = React.useState({
     labels: Object.keys(dataForBar),
     datasets: [
       {
         label: "Reservations",
-        data: arr1.map((arr: string[]) => arr.length),
+        // data: UserData.map((item) => item.userGain),
+        data: arr1.map((item) => item.length),
       },
     ],
   });
-  console.log(data);
+  React.useEffect(() => {
+    setchartData({
+      labels: Object.keys(dataForBar),
+      datasets: [
+        {
+          label: "Reservations",
+          // data: UserData.map((item) => item.userGain),
+          data: arr1.map((item) => item.length),
+        },
+      ],
+    });
+  }, [dataForBar]);
+
   return (
     <div>
-      BarComponent
-      {/* <Bar data={data} /> */}
+      <span
+        style={{
+          fontSize: "1.5rem",
+          fontWeight: "bold",
+        }}
+      >
+        Display for the selected date
+      </span>
+      <Bar data={chartData} options={{}} />
+      {/* <TempComponent chartData = {data} /> */}
     </div>
   );
 };

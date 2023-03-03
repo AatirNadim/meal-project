@@ -23,6 +23,4 @@ for(let i = 0; i < data_arr.length; i++) {
 }
 
 
-export const handleData = () => {
-    return obj;
-}
+export const shapedData = obj;
