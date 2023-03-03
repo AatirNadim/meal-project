@@ -21,6 +21,7 @@ const Main = () => {
   const [select, setSelect] = React.useState(false);
   const [date, setDate] = React.useState("");
   const [selectedData, setSelectedData] = React.useState({});
+  const [sch_array, setSch_array] = React.useState<string[]>([]);
   // console.log(data_obj);
   // React.useEffect(() => {
   //  console.log('i was changed')
@@ -28,42 +29,103 @@ const Main = () => {
 
   const handleDateChange = (e: any) => {
     // setDate(e.target.value);
-    setSelectedData(data_obj[`${e.target.value}`]);
+    setDate(e.target.value);
     // console.log(e.target.value);
     setSelect(true);
-    // console.log(data_obj[`${e.target.value}`])
+    console.log(data_obj[`${e.target.value}`]);
+    if (typeof data_obj[`${e.target.value}`] !== "undefined") {
+      setSch_array(Object.keys(data_obj[`${e.target.value}`]));
+    }
   };
-
-
 
   // console.log(selectedData,'selectedData');
   // React.useEffect(() => {
-  // }, [selectedData]);
+  //   console.log("date has been changed");
+  // }, [date]);
 
   return (
     <div className={styles.main_div}>
       <p>Enter the date for the graph</p>
-      {/* <DatePicker 
-        dateFormat={'dd/MM/yyyy'}
-        value={''}
-        onChange= {(date : Date) => console.log(date)}
-      /> */}
       <input type="date" onChange={(e) => handleDateChange(e)} />
-      {/* <div>{date.toUTCString().split('')}</div> */}
-      <div>
-        {/* {select ? {typeof data_obj[`${date}`] !== 'undefined' ? <BarComponent  dataForBar = {data_obj[`${date}`]} /> : } 
-         : <div></div>} */}
-        {selectedData ? <BarComponent dataForBar={selectedData} /> : <></>}
-        {/* <div
+
+      {/* outer div */}
+      <div
+        style={{
+          display: "flex",
+        }}
+      >
+        {/* div for the bar chart */}
+        <div
+          style={{
+            flex: 0.5,
+          }}
+        >
+          {selectedData && typeof data_obj[`${date}`] !== "undefined" ? (
+            <div
               style={{
-                display: select ? "block" : "none",
+                height: "70vh",
+                width: "50vw",
               }}
             >
-              Invalid date selected
+              <BarComponent dataForBar={data_obj[`${date}`]} />
             </div>
+          ) : (
+            <>
+              <div
+                style={{
+                  display: select ? "block" : "none",
+                }}
+              >
+                Invalid date selected
+              </div>
 
-            <div>Please select a valid date</div> */}
-        {/* // <BarComponent  dataForBar = {data_obj[`${date}`]} /> : <div></div>} */}
+              <div>Please select a valid date</div>
+            </>
+          )}
+          {/* // <BarComponent  dataForBar = {data_obj[`${date}`]} /> : <div></div>} */}
+        </div>
+        {/* div for per date details */}
+        <div
+          style={{
+            flex: 0.5,
+          }}
+        >
+          {selectedData && typeof data_obj[`${date}`] !== "undefined" ? (
+            <div>
+              <p
+                style={{
+                  fontWeight: "bold",
+                  marginBottom: "10px",
+                }}
+              >
+                Please select the date for details regarding the scheduling time
+              </p>
+              <div
+                style={{
+                  display: "flex",
+                  flexWrap: "wrap",
+                  justifyContent: "space-around",
+                  fontWeight: "bold",
+                }}
+              >
+                {sch_array.map((sch_date) => (
+                  <button
+                  style = {{
+                    height : '40px',
+                    width : '80px',
+                    border : 'none',
+                    borderRadius : '5px',
+                    
+                  }}
+                  
+                  >{sch_date}</button>
+                ))}
+              </div>
+            </div>
+          ) : (
+            <p></p>
+          )}
+        </div>
       </div>
     </div>
   );

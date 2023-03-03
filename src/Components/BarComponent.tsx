@@ -1,7 +1,7 @@
 import React from "react";
 import { objType } from "../Assets/handleData";
 
-import { Bar } from "react-chartjs-2";
+import { Bar, getElementAtEvent } from "react-chartjs-2";
 import { UserData } from "../Assets/data1";
 import { Chart, registerables } from "chart.js";
 
@@ -48,7 +48,9 @@ const BarComponent = ({ dataForBar }: objType) => {
       >
         Display for the selected date
       </span>
-      <Bar data={chartData} options={{}} />
+      <Bar data={chartData} options={{}}
+
+      />
       {/* <TempComponent chartData = {data} /> */}
     </div>
   );
