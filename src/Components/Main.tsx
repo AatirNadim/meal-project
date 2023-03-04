@@ -130,13 +130,23 @@ const Main = () => {
               </p>
               <div
                 style={{
+                  // display: "flex",
+                  // flexWrap: "wrap",
+                  // justifyContent: "space-around",
+                  // fontWeight: "bold",
+                  // paddingLeft: "1vw",
+                  // backgroundColor: "yellow",
+                }}
+              >
+                <div
+                style = {{
                   display: "flex",
                   flexWrap: "wrap",
                   justifyContent: "space-around",
                   fontWeight: "bold",
                   paddingLeft: "1vw",
                 }}
-              >
+                >
                 {sch_array.map((sch_date) => (
                   <button
                     style={{
@@ -158,6 +168,7 @@ const Main = () => {
                     {sch_date}
                   </button>
                 ))}
+                </div>
                 {/* {perDate.length > 0 ? 
                   <TimeComponent data={data_obj[`${date}`][`${perDate}`]} />
                  : 
