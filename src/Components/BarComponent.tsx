@@ -39,7 +39,13 @@ const BarComponent = ({ dataForBar }: objType) => {
   }, [dataForBar]);
 
   return (
-    <div>
+    <div
+    style = {{
+      height: "40vh",
+      backgroundColor: "",
+    }}
+    
+    >
       <span
         style={{
           fontSize: "1.5rem",
@@ -49,7 +55,6 @@ const BarComponent = ({ dataForBar }: objType) => {
         Display for the selected date
       </span>
       <Bar data={chartData} options={{}}
-
       />
       {/* <TempComponent chartData = {data} /> */}
     </div>

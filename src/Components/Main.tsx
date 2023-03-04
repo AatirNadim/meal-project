@@ -9,6 +9,7 @@ import BarComponent from "./BarComponent";
 import TimeComponent from "./TimeComponent";
 
 import { objType } from "../Assets/handleData";
+import InterimComponent from "./InterimComponent";
 
 // set data for the barchart -->
 // labels --> {labels for th x-axis}
@@ -26,8 +27,6 @@ const Main = () => {
   const [sch_array, setSch_array] = React.useState<string[]>([]);
   const [perDate, setPerDate] = React.useState<string>("");
 
-
-
   // console.log(data_obj);
   // React.useEffect(() => {
   //  console.log('i was changed')
@@ -42,6 +41,7 @@ const Main = () => {
     if (typeof data_obj[`${e.target.value}`] !== "undefined") {
       setSch_array(Object.keys(data_obj[`${e.target.value}`]));
     }
+    setPerDate("");
   };
 
   // console.log(selectedData,'selectedData');
@@ -52,29 +52,41 @@ const Main = () => {
   return (
     <div className={styles.main_div}>
       <p
-      style = {{
-        paddingLeft : '10px',
-      }}
-      >Enter the date for the graph</p>
-      <input type="date" onChange={(e) => handleDateChange(e)} />
+        style={{
+          paddingLeft: "10px",
+          lineHeight: "2.5rem",
+        }}
+      >
+        Enter the date for the graph
+      </p>
+      <p
+      style = {{paddingLeft : '10px'}}
+      ><input type="date" onChange={(e) => handleDateChange(e)} /></p>
 
       {/* outer div */}
       <div
         style={{
           display: "flex",
+          // flexWrap: "wrap",
+          flexDirection: "column",
+
         }}
       >
         {/* div for the bar chart */}
         <div
           style={{
-            flex: 0.5,
+            // flex: 0.5,
+            backgroundColor: "",
+            height: "50vh",
           }}
         >
           {selectedData && typeof data_obj[`${date}`] !== "undefined" ? (
             <div
               style={{
-                height: "70vh",
+                height: "50vh",
                 width: "50vw",
+                paddingLeft: "10px",
+                lineHeight: "2.5rem",
               }}
             >
               <BarComponent dataForBar={data_obj[`${date}`]} />
@@ -84,12 +96,18 @@ const Main = () => {
               <div
                 style={{
                   display: select ? "block" : "none",
+                  paddingLeft: "10px",
+                  marginTop: "0.5rem",
                 }}
               >
                 Invalid date selected
               </div>
 
-              <div>Please select a valid date</div>
+              <div
+              style = {{paddingLeft : '10px',
+                lineHeight : '2.5rem',
+            }}
+              ><i>Please select a valid date</i></div>
             </>
           )}
           {/* // <BarComponent  dataForBar = {data_obj[`${date}`]} /> : <div></div>} */}
@@ -97,7 +115,8 @@ const Main = () => {
         {/* div for per date details */}
         <div
           style={{
-            flex: 0.5,
+            // flex: 0.5,
+            backgroundColor: "",
           }}
         >
           {selectedData && typeof data_obj[`${date}`] !== "undefined" ? (
@@ -106,6 +125,7 @@ const Main = () => {
                 style={{
                   fontWeight: "bold",
                   marginBottom: "10px",
+                  paddingLeft: "10px",
                 }}
               >
                 Please select the date for details regarding the scheduling time
@@ -116,28 +136,37 @@ const Main = () => {
                   flexWrap: "wrap",
                   justifyContent: "space-around",
                   fontWeight: "bold",
+                  paddingLeft: "10px",
                 }}
               >
                 {sch_array.map((sch_date) => (
                   <button
-                  style = {{
-                    height : '40px',
-                    width : '90px',
-                    border : 'none',
-                    borderRadius : '5px',
-                    backgroundColor : `#6f61c2`,
-                    color : 'white',
-                    fontWeight : 'bolder',
-                    fontSize : '15px',
-                  }}
-                  onClick = {() => {
-                  console.log(data_obj[`${date}`][`${sch_date}`])
-                  setPerDate(sch_date)
-                  }}
-                  >{sch_date}</button>
+                    style={{
+                      height: "40px",
+                      width: "90px",
+                      border: "none",
+                      borderRadius: "5px",
+                      backgroundColor: `#6f61c2`,
+                      color: "white",
+                      fontWeight: "bolder",
+                      fontSize: "15px",
+                    }}
+                    onClick={() => {
+                      console.log(data_obj[`${date}`][`${sch_date}`]);
+                      setPerDate(sch_date);
+                    }}
+                  >
+                    {sch_date}
+                  </button>
                 ))}
+                {/* {perDate.length > 0 ? 
+                  <TimeComponent data={data_obj[`${date}`][`${perDate}`]} />
+                 : 
+                  <div></div>
+                } */}
+                {/* <InterimComponent data_obj = {data_obj} date = {date} perDate = {perDate}/> */}
+                {perDate.length > 0 ? <TimeComponent data={data_obj[`${date}`][`${perDate}`]} /> : <div></div>}
               </div>
-              {perDate.length > 0 ? <TimeComponent data = {data_obj[`${date}`][`${perDate}`]} /> : <div></div>}
             </div>
           ) : (
             <p></p>
