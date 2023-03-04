@@ -82,7 +82,7 @@ const Main = () => {
             <div
               style={{
                 height: "50vh",
-                // width: "50vw",
+                width: "100vw",
                 paddingLeft: "1vw",
                 lineHeight: "2.5rem",
               }}
