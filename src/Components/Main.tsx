@@ -37,7 +37,7 @@ const Main = () => {
     setDate(e.target.value);
     // console.log(e.target.value);
     setSelect(true);
-    console.log(data_obj[`${e.target.value}`]);
+    // console.log(data_obj[`${e.target.value}`]);
     if (typeof data_obj[`${e.target.value}`] !== "undefined") {
       setSch_array(Object.keys(data_obj[`${e.target.value}`]));
     }
@@ -69,14 +69,12 @@ const Main = () => {
           display: "flex",
           // flexWrap: "wrap",
           flexDirection: "column",
-
         }}
       >
         {/* div for the bar chart */}
         <div
           style={{
             // flex: 0.5,
-            backgroundColor: "",
             height: "50vh",
           }}
         >
@@ -84,8 +82,8 @@ const Main = () => {
             <div
               style={{
                 height: "50vh",
-                width: "50vw",
-                paddingLeft: "10px",
+                // width: "50vw",
+                paddingLeft: "1vw",
                 lineHeight: "2.5rem",
               }}
             >
@@ -96,7 +94,7 @@ const Main = () => {
               <div
                 style={{
                   display: select ? "block" : "none",
-                  paddingLeft: "10px",
+                  paddingLeft: "1vw",
                   marginTop: "0.5rem",
                 }}
               >
@@ -104,7 +102,7 @@ const Main = () => {
               </div>
 
               <div
-              style = {{paddingLeft : '10px',
+              style = {{paddingLeft : '1vw',
                 lineHeight : '2.5rem',
             }}
               ><i>Please select a valid date</i></div>
@@ -125,7 +123,7 @@ const Main = () => {
                 style={{
                   fontWeight: "bold",
                   marginBottom: "10px",
-                  paddingLeft: "10px",
+                  paddingLeft: "1vw",
                 }}
               >
                 Please select the date for details regarding the scheduling time
@@ -136,7 +134,7 @@ const Main = () => {
                   flexWrap: "wrap",
                   justifyContent: "space-around",
                   fontWeight: "bold",
-                  paddingLeft: "10px",
+                  paddingLeft: "1vw",
                 }}
               >
                 {sch_array.map((sch_date) => (
@@ -150,9 +148,10 @@ const Main = () => {
                       color: "white",
                       fontWeight: "bolder",
                       fontSize: "15px",
+                      marginTop: "10px",
                     }}
                     onClick={() => {
-                      console.log(data_obj[`${date}`][`${sch_date}`]);
+                      // console.log(data_obj[`${date}`][`${sch_date}`]);
                       setPerDate(sch_date);
                     }}
                   >

@@ -15,7 +15,7 @@ const TimeComponent = ({ data }: any) => {
       arr1[Math.floor(temp2 / (3 * 60 * 60))]++;
     }
     setArr(arr1);
-    console.log(arr1);
+    // console.log(arr1);
   };
 
   const [timeData, setTimeData] = React.useState({
@@ -73,7 +73,7 @@ const TimeComponent = ({ data }: any) => {
   //     "22:29:00",
   //     "22:29:31"
   // ]
-  console.log(data, "data in time component");
+  // console.log(data, "data in time component");
   return <div
   style = {{
     height: "40vh",

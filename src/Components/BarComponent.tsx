@@ -42,7 +42,6 @@ const BarComponent = ({ dataForBar }: objType) => {
     <div
     style = {{
       height: "40vh",
-      backgroundColor: "",
     }}
     
     >
